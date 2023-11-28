@@ -27,7 +27,7 @@
 		cargo VARCHAR(45) NOT NULL,
 		prioridade INT NOT NULL
 	);
-	
+
 
 	-- Inserir dados na tabela EscalonamentoUsuario
 	INSERT INTO EscalonamentoUsuario (cargo, prioridade) 
@@ -111,7 +111,7 @@
 		fkRoboSala INT,
 		PRIMARY KEY (idSala, fkHospitalSala, fkRoboSala),
 		CONSTRAINT fkHospitalSala FOREIGN KEY (fkHospitalSala) REFERENCES Hospital (idHospital),
-		CONSTRAINT fkRoboSala FOREIGN KEY (fkRoboSala) REFERENCES robocirurgiao (idRobo)
+		CONSTRAINT fkRoboSala FOREIGN KEY (fkRoboSala) REFERENCES RoboCirurgiao (idRobo)
 	);
 
 	-- Inserir dados na tabela SalaCirurgiao
