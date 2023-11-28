@@ -4,7 +4,7 @@
 	USE medconnect;
 
 	-- Crie a tabela Hospital
-	CREATE TABLE IF NOT EXISTS hospital (
+	CREATE TABLE IF NOT EXISTS Hospital (
 		idHospital INT PRIMARY KEY AUTO_INCREMENT,
 		nomeFantasia VARCHAR(45) NOT NULL,
 		CNPJ CHAR(14) NOT NULL,
@@ -12,11 +12,11 @@
 		sigla VARCHAR(45) NOT NULL,
 		responsavelLegal VARCHAR(45) NOT NULL,
 		fkHospitalSede INT,
-		CONSTRAINT fkHospitalSede FOREIGN KEY (fkHospitalSede) REFERENCES hospital (idHospital)
+		CONSTRAINT fkHospitalSede FOREIGN KEY (fkHospitalSede) REFERENCES Hospital (idHospital)
 	);
 
 	-- Inserir dados na tabela Hospital
-	INSERT INTO hospital (nomeFantasia, CNPJ, razaoSocial, sigla, responsavelLegal, fkHospitalSede) 
+	INSERT INTO Hospital (nomeFantasia, CNPJ, razaoSocial, sigla, responsavelLegal, fkHospitalSede) 
 	VALUES 
 		('Hospital ABC', '12345678901234', 'ABC Ltda', 'HABC', 'João da Silva', NULL),
 		('Hospital Einstein', '12325678901234', 'Einstein Ltda', 'HEIN', 'Maria Silva', NULL);
@@ -80,74 +80,11 @@
 		CONSTRAINT fkHospitalRobo FOREIGN KEY (fkHospital) REFERENCES hospital (idHospital)
 	);
     
-    create table if not exists Janela(
-    idJanela int primary key auto_increment,
-    Janela_atual varchar(200),
-    ativo tinyint,
-    fkMaquina int,
-    constraint fkMaquina foreign key (fkMaquina) references RoboCirurgiao (idRobo)
-    );
-    
-    create table if not exists Janela_fechada(
-    idJanela_fechada int primary key auto_increment,
-    janela_a_fechar varchar(200),
-    sinal_terminacao tinyint,
-    fkMaquina1 int,
-    constraint fkMaquina1 foreign key (fkMaquina1) references RoboCirurgiao (idRobo)
-    );
-
 
 
 	-- Inserir dados na tabela RoboCirurgiao
 	INSERT INTO RoboCirurgiao (modelo, fabricacao, fkStatus, fkHospital, idProcess) 
 	VALUES ('Modelo A', '2023-09-12', 1, 1, 'B2532B6');
-
-	-- Crie a tabela SalaCirurgiao
-	CREATE TABLE IF NOT EXISTS SalaCirurgiao (
-		idSala INT AUTO_INCREMENT,
-		numero VARCHAR(5) NOT NULL,
-		fkHospitalSala INT,
-		fkRoboSala INT,
-		PRIMARY KEY (idSala, fkHospitalSala, fkRoboSala),
-		CONSTRAINT fkHospitalSala FOREIGN KEY (fkHospitalSala) REFERENCES hospital (idHospital),
-		CONSTRAINT fkRoboSala FOREIGN KEY (fkRoboSala) REFERENCES RoboCirurgiao (idRobo)
-	);
-
-	-- Inserir dados na tabela SalaCirurgiao
-	INSERT INTO SalaCirurgiao (numero, fkHospitalSala, fkRoboSala) 
-	VALUES ('101', 1, 1);
-
-	-- Crie a tabela categoriaCirurgia
-	CREATE TABLE IF NOT EXISTS categoriaCirurgia (
-		idCategoria INT PRIMARY KEY AUTO_INCREMENT,
-		niveisPericuloridade VARCHAR(45) NOT NULL
-	);
-
-	-- Inserir dados na tabela categoriaCirurgia
-	INSERT INTO categoriaCirurgia (idCategoria, niveisPericuloridade) 
-	VALUES (1,"Muito baixo"),
-    (2, "Baixo"),
-    (3, "Médio"),
-    (4, "Alto"),
-    (5, "Muito Alto");
-
-	-- Crie a tabela cirurgia
-	CREATE TABLE IF NOT EXISTS cirurgia (
-    idCirurgia INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    dataInicio DATETIME NOT NULL,
-    nomeMedico VARCHAR(45),
-    duracao INT,
-    nomePaciente VARCHAR(45),
-    tipo VARCHAR(45),
-    fkRoboCirurgia INT,
-    CONSTRAINT fkRoboCirurgia FOREIGN KEY (fkRoboCirurgia) REFERENCES RoboCirurgiao (idRobo),
-    fkCategoria INT,
-    CONSTRAINT fkCategoria FOREIGN KEY (fkCategoria) REFERENCES categoriaCirurgia (idCategoria)
-    );
-
-	-- Inserir dados na tabela cirurgia
-	INSERT INTO cirurgia (idCirurgia, fkRoboCirurgia, dataInicio, nomeMedico, duracao, nomePaciente, tipo, fkCategoria) 
-	VALUES (1, 1, '2023-09-15 14:00:00', "Dr. Henrique Castro", 134, "Alberto Fernandez","cardiologia",1);
 
 	-- Crie a tabela Metrica
 	CREATE TABLE IF NOT EXISTS Metrica (
