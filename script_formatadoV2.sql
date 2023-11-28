@@ -46,7 +46,7 @@
 		fkHospital INT,
 		fkEscalonamento INT,
 		PRIMARY KEY (idUsuario, fkHospital),
-		CONSTRAINT fkHospital FOREIGN KEY (fkHospital) REFERENCES hospital (idHospital),
+		CONSTRAINT fkHospital FOREIGN KEY (fkHospital) REFERENCES Hospital (idHospital),
 		CONSTRAINT fkEscalonamento FOREIGN KEY (fkEscalonamento) REFERENCES EscalonamentoUsuario (idEscalonamento)
 	);
 
@@ -77,7 +77,7 @@
 		fkStatus INT,
 		fkHospital INT,
 		CONSTRAINT fkStatus FOREIGN KEY (fkStatus) REFERENCES statusRobo (idStatus),
-		CONSTRAINT fkHospitalRobo FOREIGN KEY (fkHospital) REFERENCES hospital (idHospital)
+		CONSTRAINT fkHospitalRobo FOREIGN KEY (fkHospital) REFERENCES Hospital (idHospital)
 	);
     
 
