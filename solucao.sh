@@ -25,7 +25,7 @@ sudo docker volume create volume-mysql
 
 echo "Criando container MySQL"
 sudo docker image build -t mysql-image -f mysql.dockerfile .
-sudo docker run -d -p 3306:3306 --name container-mysql -v volume-mysql:/docker-entrypoint-initdb.d -e "MYSQL_ROOT_PASSWORD=segredo" -e "MYSQL_DATABASE=medconnect" -e "MYSQL_INITDB_SKIP_TZINFO=yes" mysql-image
+sudo docker run -d -p 3306:3306 --name container-mysql -v volume-mysql:/var/lib/mysql -e "MYSQL_ROOT_PASSWORD=segredo" -e "MYSQL_DATABASE=medconnect" -e "MYSQL_INITDB_SKIP_TZINFO=yes" mysql-image
 
 # Aguarda até que o MySQL esteja pronto para aceitar conexões
 #while ! docker exec container-mysql mysqladmin ping --silent; do
