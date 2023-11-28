@@ -4,7 +4,7 @@
 	USE medconnect;
 
 	-- Crie a tabela Hospital
-	CREATE TABLE IF NOT EXISTS Hospital (
+	CREATE TABLE IF NOT EXISTS hospital (
 		idHospital INT PRIMARY KEY AUTO_INCREMENT,
 		nomeFantasia VARCHAR(45) NOT NULL,
 		CNPJ CHAR(14) NOT NULL,
@@ -12,11 +12,11 @@
 		sigla VARCHAR(45) NOT NULL,
 		responsavelLegal VARCHAR(45) NOT NULL,
 		fkHospitalSede INT,
-		CONSTRAINT fkHospitalSede FOREIGN KEY (fkHospitalSede) REFERENCES Hospital (idHospital)
+		CONSTRAINT fkHospitalSede FOREIGN KEY (fkHospitalSede) REFERENCES hospital (idHospital)
 	);
 
 	-- Inserir dados na tabela Hospital
-	INSERT INTO Hospital (nomeFantasia, CNPJ, razaoSocial, sigla, responsavelLegal, fkHospitalSede) 
+	INSERT INTO hospital (nomeFantasia, CNPJ, razaoSocial, sigla, responsavelLegal, fkHospitalSede) 
 	VALUES 
 		('Hospital ABC', '12345678901234', 'ABC Ltda', 'HABC', 'João da Silva', NULL),
 		('Hospital Einstein', '12325678901234', 'Einstein Ltda', 'HEIN', 'Maria Silva', NULL);
@@ -27,7 +27,6 @@
 		cargo VARCHAR(45) NOT NULL,
 		prioridade INT NOT NULL
 	);
-
 
 	-- Inserir dados na tabela EscalonamentoUsuario
 	INSERT INTO EscalonamentoUsuario (cargo, prioridade) 
@@ -47,7 +46,7 @@
 		fkHospital INT,
 		fkEscalonamento INT,
 		PRIMARY KEY (idUsuario, fkHospital),
-		CONSTRAINT fkHospital FOREIGN KEY (fkHospital) REFERENCES Hospital (idHospital),
+		CONSTRAINT fkHospital FOREIGN KEY (fkHospital) REFERENCES hospital (idHospital),
 		CONSTRAINT fkEscalonamento FOREIGN KEY (fkEscalonamento) REFERENCES EscalonamentoUsuario (idEscalonamento)
 	);
 
@@ -78,7 +77,7 @@
 		fkStatus INT,
 		fkHospital INT,
 		CONSTRAINT fkStatus FOREIGN KEY (fkStatus) REFERENCES statusRobo (idStatus),
-		CONSTRAINT fkHospitalRobo FOREIGN KEY (fkHospital) REFERENCES Hospital (idHospital)
+		CONSTRAINT fkHospitalRobo FOREIGN KEY (fkHospital) REFERENCES hospital (idHospital)
 	);
     
     create table if not exists Janela(
@@ -110,7 +109,7 @@
 		fkHospitalSala INT,
 		fkRoboSala INT,
 		PRIMARY KEY (idSala, fkHospitalSala, fkRoboSala),
-		CONSTRAINT fkHospitalSala FOREIGN KEY (fkHospitalSala) REFERENCES Hospital (idHospital),
+		CONSTRAINT fkHospitalSala FOREIGN KEY (fkHospitalSala) REFERENCES hospital (idHospital),
 		CONSTRAINT fkRoboSala FOREIGN KEY (fkRoboSala) REFERENCES RoboCirurgiao (idRobo)
 	);
 
@@ -144,7 +143,7 @@
     CONSTRAINT fkRoboCirurgia FOREIGN KEY (fkRoboCirurgia) REFERENCES RoboCirurgiao (idRobo),
     fkCategoria INT,
     CONSTRAINT fkCategoria FOREIGN KEY (fkCategoria) REFERENCES categoriaCirurgia (idCategoria)
-);
+    );
 
 	-- Inserir dados na tabela cirurgia
 	INSERT INTO cirurgia (idCirurgia, fkRoboCirurgia, dataInicio, nomeMedico, duracao, nomePaciente, tipo, fkCategoria) 
@@ -208,40 +207,40 @@
 	);
     		
 
-INSERT INTO componentes (idComponentes,nome, unidade, fkCategoriaComponente, fkMetrica) 
-VALUES (1,'Porcentagem da CPU', '%', 1, 1),
-(2,'Velocidade da CPU', 'GHz', 1, 11),
-(3,'Tempo no sistema da CPU', 's', 1, null),
-(4,'Processos da CPU', null, 1, 3);
+	INSERT INTO componentes (idComponentes,nome, unidade, fkCategoriaComponente, fkMetrica) 
+	VALUES (1,'Porcentagem da CPU', '%', 1, 1),
+	(2,'Velocidade da CPU', 'GHz', 1, 11),
+	(3,'Tempo no sistema da CPU', 's', 1, null),
+	(4,'Processos da CPU', null, 1, 3);
 
 -- Inserir Memória RAM
-INSERT INTO componentes (idComponentes,nome, unidade, fkCategoriaComponente, fkMetrica) 
-VALUES (5,'Porcentagem da Memoria', '%', 2, 5),
-(6,'Total da Memoria', 'GB', 2, null),
-(7,'Uso da Memoria', 'GB', 2, null),
-(8,'Porcentagem da Memoria Swap', '%',2,6),
-(9,'Uso da Memoria Swap', 'GB', 2, null);
+	INSERT INTO componentes (idComponentes,nome, unidade, fkCategoriaComponente, fkMetrica) 
+	VALUES (5,'Porcentagem da Memoria', '%', 2, 5),
+	(6,'Total da Memoria', 'GB', 2, null),
+	(7,'Uso da Memoria', 'GB', 2, null),
+	(8,'Porcentagem da Memoria Swap', '%',2,6),
+	(9,'Uso da Memoria Swap', 'GB', 2, null);
 
 -- Inserir Disco
-INSERT INTO componentes (idComponentes, nome, unidade, fkCategoriaComponente, fkMetrica) 
-VALUES (10,'Porcentagem do Disco', '%', 3, 8),
-(11,'Total do Disco', 'GB', 3, null),
-(12,'Uso do Disco', 'GB', 3, null),
-(13,'Tempo de Leitura do Disco', 's', 3, null),
-(14,'Tempo de Escrita do Disco', 's', 3, null);
+	INSERT INTO componentes (idComponentes, nome, unidade, fkCategoriaComponente, fkMetrica) 
+	VALUES (10,'Porcentagem do Disco', '%', 3, 8),
+	(11,'Total do Disco', 'GB', 3, null),
+	(12,'Uso do Disco', 'GB', 3, null),
+	(13,'Tempo de Leitura do Disco', 's', 3, null),
+	(14,'Tempo de Escrita do Disco', 's', 3, null);
 
 -- Inserir Rede
-INSERT INTO componentes (idComponentes, nome, descricaoAdd, fkCategoriaComponente, fkMetrica) 
-VALUES (15,'Status da Rede', 'Conexao da Rede', 4, null),
-(16,'Latencia de Rede', 'Latencia em MS', 4, 10),
-(17,'Bytes enviados','Bytes enviados da Rede', 4, null),
-(18,'Bytes recebidos','Bytes recebidos da Rede', 4, null);
+	INSERT INTO componentes (idComponentes, nome, descricaoAdd, fkCategoriaComponente, fkMetrica) 
+	VALUES (15,'Status da Rede', 'Conexao da Rede', 4, null),
+	(16,'Latencia de Rede', 'Latencia em MS', 4, 10),
+	(17,'Bytes enviados','Bytes enviados da Rede', 4, null),
+	(18,'Bytes recebidos','Bytes recebidos da Rede', 4, null);
 
-INSERT INTO componentes (idComponentes, nome, descricaoAdd, fkCategoriaComponente, fkMetrica) 
-VALUES 
-(19,'Total de processos', 'processos', 1, null),
-(20,'Total de Threads', 'threads', 1, null),
-(21,'Quantidade de processos', 'Quantidades de processos em execução', 5, null);
+	INSERT INTO componentes (idComponentes, nome, descricaoAdd, fkCategoriaComponente, fkMetrica) 
+	VALUES 
+	(19,'Total de processos', 'processos', 1, null),
+	(20,'Total de Threads', 'threads', 1, null),
+	(21,'Quantidade de processos', 'Quantidades de processos em execução', 5, null);
 
 
 	CREATE TABLE dispositivos_usb (
@@ -253,7 +252,7 @@ VALUES
 		conectado BOOLEAN,
 		fkRoboUsb int , 
 	constraint fkRoboUsb foreign key (fkRoboUsb) references  RoboCirurgiao(idRobo)
-	);
+		);
 
 	-- Crie a tabela Registros
 	CREATE TABLE IF NOT EXISTS Registros (
