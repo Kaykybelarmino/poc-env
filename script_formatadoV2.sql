@@ -124,7 +124,7 @@
 	);
 
 	-- Inserir dados na tabela categoriaCirurgia
-	INSERT INTO categoriaCirurgia (niveisPericuloridade) 
+	INSERT INTO categoriaCirurgia (idCategoria, niveisPericuloridade) 
 	VALUES (1,"Muito baixo"),
     (2, "Baixo"),
     (3, "Médio"),
